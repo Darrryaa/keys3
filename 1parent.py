@@ -1,19 +1,23 @@
 def par_1():
     '''
-    The function determines the annual tax-free amount.
+    Function that calculates tax per parent.
     '''
     amount = 0
     amount_tax = 0
     amount_diff = 0
     sum_tax = 0
+    amount_month = []
+    for month in range(1, 12 + 1):
+        value = float(input())
+        amount += value
+        amount_month.append((value))
+    print(round(amount, 2))
     for month in range(1, 12 + 1):
         diff = 0
         taxxist = 0
-        value = float(input())
         tax = float(input())
-        amount += value
         amount_tax += tax
-        diff = value - tax
+        diff = amount_month[month-1] - tax
         amount_diff += diff
         if diff > 432201:
             taxxist += (diff - 432201) * 0.396
@@ -36,7 +40,10 @@ def par_1():
         if 0 < diff <= 12951:
             taxxist += diff * 0.1
         sum_tax += taxxist
-    return amount, amount_tax, amount_diff, sum_tax, sum_tax / 12
+    print(round(amount_tax, 2))
+    print(round(amount_diff, 2))
+    print(round(sum_tax, 2))
+    print(round(sum_tax / 12, 2))
 
 
-print(par_1())
+par_1()
