@@ -1,0 +1,44 @@
+def one_person():
+
+    total_income = 0
+    total_tax_free = 0
+    total_taxed = 0
+    total_tax_paid = 0
+    monthly_incomes = []
+
+    for month in range(1, 12 + 1):
+        income_value = float(input("Введите доход за месяц: "))
+        total_income += income_value
+        monthly_incomes.append(income_value)
+
+    for month in range(1, 12 + 1):
+        tax_free_allowance = float(input("Введите сумму налогового вычета за месяц: "))
+        total_tax_free += tax_free_allowance
+        taxable_income = monthly_incomes[month - 1] - tax_free_allowance
+
+        if taxable_income > 406751:
+            tax_rate = 0.396
+        elif 405101 < taxable_income <= 406751:
+            tax_rate = 0.35
+        elif 186351 < taxable_income <= 405101:
+            tax_rate = 0.33
+        elif 89351 < taxable_income <= 186351:
+            tax_rate = 0.28
+        elif 36901 < taxable_income <= 89351:
+            tax_rate = 0.25
+        elif 9075 < taxable_income <= 36901:
+            tax_rate = 0.15
+        else:
+            tax_rate = 0.1
+
+        tax_paid = taxable_income * tax_rate
+        total_taxed += (taxable_income - tax_paid)
+        total_tax_paid += tax_paid
+
+    print("Сумма годового дохода, не облагаемого налогом:", round(total_tax_free, 2))
+    print("Сумма годового дохода, облагаемого налогом:", round(total_taxed, 2))
+    print("Величина годового налога:", round(total_tax_paid, 2))
+    print("Ежемесячный налоговый платёж: ", round(total_tax_paid / 12, 2))
+
+
+one_person()
