@@ -21,7 +21,8 @@ def one_person():
         tax_free_allowance = float(input())
         total_tax_free += tax_free_allowance
         taxable_income = monthly_incomes[month - 1] - tax_free_allowance
-
+        total_taxed += taxable_income
+        
         if taxable_income > 406751:
             tax_rate += (taxable_income - 406751) * 0.396
             taxable_income = 406751
