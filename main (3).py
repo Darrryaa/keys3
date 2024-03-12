@@ -45,58 +45,49 @@ def one_person():
             print("Величина годового налога:", round(total_tax_paid, 2))
             print("Ежемесячный налоговый платёж: ", round(total_tax_paid / 12, 2))
             
-def universal_calc(num, count, nonTax):
-            # Вся сумма с которой мы должны заплатить налоги
-            taxable = count - nonTax
-            # Общий налог
-            allTax = 0
+def tax(count, nonTax):
+    taxable = count - nonTax
+    allTax = 0
 
-            for elem in YEAR_TAX:
-                if elem[num] < taxable:
-                    # Сколько денег осталось с которых не уплачен налог
-                    taxable = taxable - elem[num]
-                    allTax += elem[num] * (elem[0] * 0.01)
-                else:
-                    taxable = taxable
-                    allTax += taxable * (elem[0] * 0.01)
-                    return allTax
-
-            # Когда мы понимаем, что наша сумма превышает всю таблицу и мы не досчитали до конца, выйдя из таблицы
-            # мы возьмем оставшиеся деньги и посчитаем их по самому максимальному проценту в таблице, так как до этого
-            # мы шли в таблице от минимального процента к максимальному
-            allTax += taxable * (YEAR_TAX[6][0] * 0.01)
+    for elem in YEAR_TAX:
+        if (elem[1] < taxable):
+            taxable = taxable - elem[1]
+            allTax += elem[1] * (elem[0] * 0.01)
+        else:
+            taxable = taxable
+            allTax += taxable * (elem[0] * 0.01)
             return allTax
  
-def lab_1():
+def married_couple():
+    print("Укажите величину годового дохода: ")
 
-            count = 0
-            for elem in MONTH:
-                count += int(input(f"Доход в {elem} (USD): "))
+    count = 0
+    for elem in MONTH:
+        count += int(input(f"Доход в {elem} (USD): "))
 
-            print(f"Сумма годового дохода: ${count}")
+    print(f"Сумма годового дохода: ${count}")
 
-            print("Укажите величину годовой суммы, не облагаемой налогом: ")
+    print("Укажите величину годовой суммы, не облагаемой налогом: ")
 
-            nonTax = 0
-            for elem in MONTH:
-                nonTax += int(input(f"Сумма не облагаемая налогом в январе {elem} (USD): "))
+    nonTax = 0
+    for elem in MONTH:
+        nonTax += int(input(f"Сумма не облагаемая налогом в январе {elem} (USD): "))
 
-            print(f"Сумма годового дохода, не облагаемого налогом: ${nonTax}")
+    print(f"Сумма годового дохода, не облагаемого налогом: ${nonTax}")
 
-            if nonTax > count:
-                print(
-                    f"сумма не облагаемая налогом не может быть больше чем облагаемая, ошибка в веденных данных! ({nonTax} > {count})")
-                return
+    if (nonTax > count):
+        print(f"сумма не облагаемая налогом не может быть больше чем облагаемая, ошибка в веденных данных! ({nonTax} > {count})")
+        return
 
-            print(f"Сумма годового дохода, облагаемого налогом: ${count - nonTax}")
+    print(f"Сумма годового дохода, облагаемого налогом: ${count - nonTax}")
 
-            allTax = universal_calc(num, count, nonTax)
+    allTax = tax(count, nonTax)
 
-            print(f"Величина годового налога: {int(allTax)}")
+    print(f"Величина годового налога: {int(allTax)}")
 
-            allTax = allTax / 12
+    allTax = allTax / 12
 
-            print(f"Ежемесячный налоговый платеж: {int(allTax)}")
+    print(f"Ежемесячный налоговый платеж: {int(allTax)}")
 
 def one_parent():
             '''
@@ -166,14 +157,14 @@ def one_parent():
 def main():
     max_month = 12
     MONTH = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре',
-                 'декабре']
-    YEAR_TAX = [[10, 9075, 18150, 12950],
-                [15, 36900, 73800, 49400],
-                [25, 89350, 148850, 127550],
-                [28, 186350, 226850, 206600],
-                [33, 405100, 405100, 405100],
-                [35, 406750, 457600, 432200],
-                [39.6, 406751, 457601, 432201]]
+         'декабре']
+YEAR_TAX = [[10, 18150],
+            [15, 73800],
+            [25, 148850],
+            [28, 226850],
+            [33, 405100],
+            [35, 457600],
+            [39.6, 457601]]
 
     print("Укажите категорию налогоплательщика: ")
     num = 0
@@ -189,7 +180,7 @@ def main():
     if num == 1:
         one_person()
     elif num == 2:
-        lab_1()
+        married_couple()
     else:
         one_parent()
 
