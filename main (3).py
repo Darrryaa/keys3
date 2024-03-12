@@ -48,8 +48,6 @@ def one_person():
     print(total_taxed)
     print(total_tax_paid)
     print(total_tax_paid / 12)
-
-one_person()
             
 def tax(count, nonTax):
     taxable = count - nonTax
