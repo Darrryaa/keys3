@@ -10,13 +10,13 @@ def one_parent():
     sum_tax = 0
     amount_month = []
     for month in range(1, 12 + 1):
-        value = float(input(f"Доход в {MONTH[month-1]} (USD): "))
+        value = float(input(f'{ru.INCOME_IN} {MONTH[month-1]} (USD): '))
         amount += value
         amount_month.append(value)
-    print(f"Сумма годового дохода: ${round(amount, 2)}")
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${round(amount, 2)}')
     for month in range(1, 12 + 1):
         progress_tax = 0
-        tax_free = float(input(f"Сумма не облагаемая налогом в {MONTH[month-1]} (USD): "))
+        tax_free = float(input(f'{ru.AMOUNT_TAX_FREE_IN} {MONTH[month-1]} (USD): '))
         no_tax += tax_free
         diff = amount_month[month-1] - tax_free
         wth_tax += diff
@@ -41,10 +41,10 @@ def one_parent():
         if 0 < diff <= 12951:
             progress_tax += diff * 0.1
         sum_tax += progress_tax
-    print(f"Сумма годового дохода, необлагаемого налогом: ${round(no_tax, 2)}")
-    print(f"Сумма годового дохода, облагаемого налогом: ${round(wth_tax, 2)}")
-    print(f"Величина годового налога: {round(sum_tax, 2)}")
-    print(f"Ежемесячный налоговый платеж: {round(sum_tax / 12, 2)}")
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${round(no_tax, 2)}')
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} ${round(wth_tax, 2)}')
+    print(f'{ru.ANNUAL_TAX_AMOUNT} {round(sum_tax, 2)}')
+    print(f'{ru.MONTHLY_TAX_PAYMENT} {round(sum_tax / 12, 2)}')
 
 
 one_parent()
