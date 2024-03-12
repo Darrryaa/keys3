@@ -12,13 +12,13 @@ def one_person():
     monthly_incomes = []
 
     for month in range(1, 12 + 1):
-        income_value = float(input())
+        income_value = float(input("Введите доход за месяц: "))
         total_income += income_value
         monthly_incomes.append(income_value)
 
     for month in range(1, 12 + 1):
         tax_rate = 0
-        tax_free_allowance = float(input())
+        tax_free_allowance = float(input("Введите сумму налогового вычета за месяц: "))
         total_tax_free += tax_free_allowance
         taxable_income = monthly_incomes[month - 1] - tax_free_allowance
         total_taxed += taxable_income
@@ -45,10 +45,10 @@ def one_person():
             tax_rate += taxable_income * 0.1
         total_tax_paid += tax_rate
 
-    print(total_tax_free)
-    print(total_taxed)
-    print(total_tax_paid)
-    print(total_tax_paid / 12)
+    print("Сумма годового дохода, не облагаемого налогом:", round(total_tax_free, 2))
+    print("Сумма годового дохода, облагаемого налогом:", round(total_taxed, 2))
+    print("Величина годового налога:", round(total_tax_paid, 2))
+    print("Ежемесячный налоговый платёж: ", round(total_tax_paid / 12, 2))
             
 def tax(count, nonTax):
     taxable = count - nonTax
