@@ -12,13 +12,13 @@ def one_person():
     monthly_incomes = []
 
     for month in range(1, 12 + 1):
-        income_value = float(input("Введите доход за месяц: "))
+        income_value = float(input(f'{ru.ENTER_INCOME_FOR_MONTH}'))
         total_income += income_value
         monthly_incomes.append(income_value)
 
     for month in range(1, 12 + 1):
         tax_rate = 0
-        tax_free_allowance = float(input("Введите сумму налогового вычета за месяц: "))
+        tax_free_allowance = float(input(f'{ru.ENTER_AMOUNT_OF_TAX_DEDUCTION_FOR_MONTH}'))
         total_tax_free += tax_free_allowance
         taxable_income = monthly_incomes[month - 1] - tax_free_allowance
         total_taxed += taxable_income
@@ -45,10 +45,10 @@ def one_person():
             tax_rate += taxable_income * 0.1
         total_tax_paid += tax_rate
 
-    print("Сумма годового дохода, не облагаемого налогом:", round(total_tax_free, 2))
-    print("Сумма годового дохода, облагаемого налогом:", round(total_taxed, 2))
-    print("Величина годового налога:", round(total_tax_paid, 2))
-    print("Ежемесячный налоговый платёж: ", round(total_tax_paid / 12, 2))
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED}, round(total_tax_free, 2)')
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME}, round(total_taxed, 2)')
+    print(f'{ru.ANNUAL_TAX_AMOUNT}, round(total_tax_paid, 2)')
+    print(f'{ru.MONTHLY_TAX_PAYMENT}, round(total_tax_paid / 12, 2)')
             
 def tax(count, nonTax):
     YEAR_TAX = [[10, 18150],
@@ -71,37 +71,37 @@ def tax(count, nonTax):
             return allTax
  
 def married_couple():
-    MONTH = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре',
-         'декабре']
-    print("Укажите величину годового дохода: ")
+    MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
+         'December']
+    print(f'{ru.ENTER_AMOUNT_OF_ANNUAL_INCOME}')
 
     count = 0
     for elem in MONTH:
-        count += int(input(f"Доход в {elem} (USD): "))
+        count += int(input(f'{ru.INCOME_IN} {elem} (USD): '))
 
-    print(f"Сумма годового дохода: ${count}")
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${count}')
 
-    print("Укажите величину годовой суммы, не облагаемой налогом: ")
+    print(f'{ru.SPECIFY_THE_AMOUNT_OF_ANNUAL_AMOUNT_NOT_TAXED}')
 
     nonTax = 0
     for elem in MONTH:
-        nonTax += int(input(f"Сумма не облагаемая налогом {elem} (USD): "))
+        nonTax += int(input(f'{ru.AMOUNT_TAX_FREE} {elem} (USD): '))
 
-    print(f"Сумма годового дохода, не облагаемого налогом: ${nonTax}")
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${nonTax}')
 
     if (nonTax > count):
-        print(f"сумма не облагаемая налогом не может быть больше чем облагаемая, ошибка в веденных данных! ({nonTax} > {count})")
+        print(f'{ru.AMOUNT_NOT_TAXED_CAN_NOT_BE_MORE_THAN_TAXED} ({nonTax} > {count})')
         return
 
-    print(f"Сумма годового дохода, облагаемого налогом: ${count - nonTax}")
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} ${count - nonTax} ${count - nonTax}')
 
     allTax = tax(count, nonTax)
 
-    print(f"Величина годового налога: {int(allTax)}")
+    print(f'{ru.ANNUAL_TAX_AMOUNT} {int(allTax)}')
 
     allTax = allTax / 12
 
-    print(f"Ежемесячный налоговый платеж: {int(allTax)}")
+    print(f'{ru.MONTHLY_TAX_PAYMENT} {int(allTax)}')
 
 def one_parent():
     '''
@@ -151,14 +151,14 @@ def one_parent():
 
 def main():
     max_month = 12
-    print("Укажите категорию налогоплательщика: ")
+    print(f'{ru.SPECIFY_CATEGORY_OF_TAXPAYER}')
     num = 0
     while (num < 1 or num > 3):
-        print("1. Субъект")
-        print("2. Супружеская пара")
-        print("3. Один родитель")
+        print(f' 1. {ru.SUBJECT}')
+        print(f' 2. {ru.MARRIED_COUPLE}')
+        print(f' 3. {ru.ONE_PARENT}')
 
-        num = int(input("Введите значение [1-3]:"))
+        num = int(input(f'{ru.ENTER_VALUE}[1-3]: '))
 
     if num == 1:
         one_person()
