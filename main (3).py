@@ -5,45 +5,51 @@ import ru_local as ru
 
 def one_person():
 
-            total_income = 0
-            total_tax_free = 0
-            total_taxed = 0
-            total_tax_paid = 0
-            monthly_incomes = []
+    total_income = 0
+    total_tax_free = 0
+    total_taxed = 0
+    total_tax_paid = 0
+    monthly_incomes = []
 
-            for month in range(1, 12 + 1):
-                income_value = float(input("Введите доход за месяц: "))
-                total_income += income_value
-                monthly_incomes.append(income_value)
+    for month in range(1, 12 + 1):
+        income_value = float(input())
+        total_income += income_value
+        monthly_incomes.append(income_value)
 
-            for month in range(1, 12 + 1):
-                tax_free_allowance = float(input("Укажите величину годовой суммы, не облагаемой налогом:"))
-                total_tax_free += tax_free_allowance
-                taxable_income = monthly_incomes[month - 1] - tax_free_allowance
+    for month in range(1, 12 + 1):
+        tax_rate = 0
+        tax_free_allowance = float(input())
+        total_tax_free += tax_free_allowance
+        taxable_income = monthly_incomes[month - 1] - tax_free_allowance
 
-                if taxable_income > 406751:
-                    tax_rate = 0.396
-                elif 405101 < taxable_income <= 406751:
-                    tax_rate = 0.35
-                elif 186351 < taxable_income <= 405101:
-                    tax_rate = 0.33
-                elif 89351 < taxable_income <= 186351:
-                    tax_rate = 0.28
-                elif 36901 < taxable_income <= 89351:
-                    tax_rate = 0.25
-                elif 9075 < taxable_income <= 36901:
-                    tax_rate = 0.15
-                else:
-                    tax_rate = 0.1
+        if taxable_income > 406751:
+            tax_rate += (taxable_income - 406751) * 0.396
+            taxable_income = 406751
+        if 405101 < taxable_income <= 406751:
+            tax_rate += (taxable_income - 406751) * 0.35
+            taxable_income = 405101
+        if 186351 < taxable_income <= 405101:
+            tax_rate += (taxable_income - 406751) * 0.33
+            taxable_income = 186351
+        if 89351 < taxable_income <= 186351:
+            tax_rate += (taxable_income - 406751) * 0.28
+            taxable_income = 89351
+        if 36901 < taxable_income <= 89351:
+            tax_rate += (taxable_income - 406751) * 0.25
+            taxable_income = 36901
+        if 9075 < taxable_income <= 36901:
+            tax_rate += (taxable_income - 406751) * 0.15
+            taxable_income = 9075
+        if 0 < taxable_income < 9075:
+            tax_rate += taxable_income * 0.1
+        total_tax_paid += tax_rate
 
-                tax_paid = taxable_income * tax_rate
-                total_taxed += (taxable_income - tax_paid)
-                total_tax_paid += tax_paid
+    print(total_tax_free)
+    print(total_taxed)
+    print(total_tax_paid)
+    print(total_tax_paid / 12)
 
-            print("Сумма годового дохода, не облагаемого налогом:", round(total_tax_free, 2))
-            print("Сумма годового дохода, облагаемого налогом:", round(total_taxed, 2))
-            print("Величина годового налога:", round(total_tax_paid, 2))
-            print("Ежемесячный налоговый платёж: ", round(total_tax_paid / 12, 2))
+one_person()
             
 def tax(count, nonTax):
     taxable = count - nonTax
