@@ -2,19 +2,21 @@ def one_parent():
     '''
     Function that calculates tax per parent.
     '''
+    MONTH = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре',
+             'декабре']
     amount = 0
     no_tax = 0
     wth_tax = 0
     sum_tax = 0
     amount_month = []
     for month in range(1, 12 + 1):
-        value = float(input())
+        value = float(input(f"Доход в {MONTH[month-1]} (USD): "))
         amount += value
         amount_month.append(value)
-    print(round(amount, 2))
+    print(f"Сумма годового дохода: ${round(amount, 2)}")
     for month in range(1, 12 + 1):
         progress_tax = 0
-        tax_free = float(input())
+        tax_free = float(input(f"Сумма не облагаемая налогом в {MONTH[month-1]} (USD): "))
         no_tax += tax_free
         diff = amount_month[month-1] - tax_free
         wth_tax += diff
@@ -39,10 +41,10 @@ def one_parent():
         if 0 < diff <= 12951:
             progress_tax += diff * 0.1
         sum_tax += progress_tax
-    print(round(no_tax, 2))
-    print(round(wth_tax, 2))
-    print(round(sum_tax, 2))
-    print(round(sum_tax / 12, 2))
+    print(f"Сумма годового дохода, необлагаемого налогом: ${round(no_tax, 2)}")
+    print(f"Сумма годового дохода, облагаемого налогом: ${round(wth_tax, 2)}")
+    print(f"Величина годового налога: {round(sum_tax, 2)}")
+    print(f"Ежемесячный налоговый платеж: {round(sum_tax / 12, 2)}")
 
 
 one_parent()
