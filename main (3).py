@@ -187,11 +187,10 @@ def main():
     print("Укажите величину годового дохода: ")
 
     if num == 1:
-        
+        one_person()
     elif num == 2:
-        
+        lab_1()
     else:
-
         one_parent()
 
 if __name__ == '__main__':
