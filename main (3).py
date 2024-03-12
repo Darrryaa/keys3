@@ -17,7 +17,7 @@ def one_person():
                 monthly_incomes.append(income_value)
 
             for month in range(1, 12 + 1):
-                tax_free_allowance = float(input())
+                tax_free_allowance = float(input(Укажите величину годовой суммы, не облагаемой налогом:))
                 total_tax_free += tax_free_allowance
                 taxable_income = monthly_incomes[month - 1] - tax_free_allowance
 
