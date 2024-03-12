@@ -71,7 +71,7 @@ def married_couple():
 
     nonTax = 0
     for elem in MONTH:
-        nonTax += int(input(f"Сумма не облагаемая налогом в январе {elem} (USD): "))
+        nonTax += int(input(f"Сумма не облагаемая налогом {elem} (USD): "))
 
     print(f"Сумма годового дохода, не облагаемого налогом: ${nonTax}")
 
