@@ -74,33 +74,26 @@ def married_couple():
     MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
          'December']
     print(f'{ru.ENTER_AMOUNT_OF_ANNUAL_INCOME}')
-
+    
     count = 0
     for elem in MONTH:
         count += int(input(f'{ru.INCOME_IN} {elem} (USD): '))
-
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${count}')
-
     print(f'{ru.SPECIFY_THE_AMOUNT_OF_ANNUAL_AMOUNT_NOT_TAXED}')
 
     nonTax = 0
     for elem in MONTH:
         nonTax += int(input(f'{ru.AMOUNT_TAX_FREE} {elem} (USD): '))
-
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${nonTax}')
 
     if (nonTax > count):
         print(f'{ru.AMOUNT_NOT_TAXED_CAN_NOT_BE_MORE_THAN_TAXED} ({nonTax} > {count})')
         return
-
+        
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} ${count - nonTax} ${count - nonTax}')
-
     allTax = tax(count, nonTax)
-
     print(f'{ru.ANNUAL_TAX_AMOUNT} {int(allTax)}')
-
     allTax = allTax / 12
-
     print(f'{ru.MONTHLY_TAX_PAYMENT} {int(allTax)}')
     
 def one_parent():
