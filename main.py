@@ -49,50 +49,50 @@ def one_person():
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} {round(total_taxed, 2)}')
     print(f'{ru.ANNUAL_TAX_AMOUNT} {round(total_tax_paid, 2)}')
     print(f'{ru.MONTHLY_TAX_PAYMENT} {round(total_tax_paid / 12, 2)}')
-            
-def tax(count, nonTax):
-    YEAR_TAX = [[10, 18150],
-            [15, 73800],
-            [25, 148850],
-            [28, 226850],
-            [33, 405100],
-            [35, 457600],
-            [39.6, 457601]]
-    taxable = count - nonTax
-    allTax = 0
 
-    for elem in YEAR_TAX:
-        if (elem[1] < taxable):
-            taxable = taxable - elem[1]
-            allTax += elem[1] * (elem[0] * 0.01)
-        else:
-            taxable = taxable
-            allTax += taxable * (elem[0] * 0.01)
-            return allTax
  
 def married_couple():
-    print(f'{ru.ENTER_AMOUNT_OF_ANNUAL_INCOME}')
-    
-    count = 0
-    for elem in range(12):
-        count += int(input(f'{ru.INCOME_IN} {ru.NAME[elem]} (USD): '))
-    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${count}')
-    print(f'{ru.SPECIFY_THE_AMOUNT_OF_ANNUAL_AMOUNT_NOT_TAXED}')
-
-    nonTax = 0
-    for elem in range(12):
-        nonTax += int(input(f'{ru.AMOUNT_TAX_FREE} {ru.NAME[elem]} (USD): '))
-    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${nonTax}')
-
-    if (nonTax > count):
-        print(f'{ru.AMOUNT_NOT_TAXED_CAN_NOT_BE_MORE_THAN_TAXED} ({nonTax} > {count})')
-        return
-        
-    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} ${count - nonTax} ${count - nonTax}')
-    allTax = tax(count, nonTax)
-    print(f'{ru.ANNUAL_TAX_AMOUNT} {int(allTax)}')
-    allTax = allTax / 12
-    print(f'{ru.MONTHLY_TAX_PAYMENT} {int(allTax)}')
+    amount = 0
+    no_tax = 0
+    wth_tax = 0
+    sum_tax = 0
+    amount_month = []
+    for month in range(1, 12 + 1):
+        value = float(input(f'{ru.INCOME_IN} {ru.NAME[month - 1]} (USD): '))
+        amount += value
+        amount_month.append(value)
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${round(amount, 2)}')
+    for month in range(1, 12 + 1):
+        progress_tax = 0
+        tax_free = float(input(f'{ru.AMOUNT_TAX_FREE_IN} {ru.NAME[month - 1]} (USD): '))
+        no_tax += tax_free
+        diff = amount_month[month - 1] - tax_free
+        wth_tax += diff
+        if diff > 457601:
+            progress_tax += (diff - 457601) * 0.396
+            diff = 457601
+        if 405101 < diff <= 457601:
+            progress_tax += (diff - 405101) * 0.35
+            diff = 405101
+        if 226851 < diff <= 405101:
+            progress_tax += (diff - 226851) * 0.33
+            diff = 226851
+        if 148851 < diff <= 226851:
+            progress_tax += (diff - 148851) * 0.28
+            diff = 148851
+        if 73801 < diff <= 148851:
+            progress_tax += (diff - 73801) * 0.25
+            diff = 73801
+        if 18151 < diff <= 73801:
+            progress_tax += (diff - 18151) * 0.15
+            diff = 18151
+        if 0 < diff <= 18151:
+            progress_tax += diff * 0.1
+        sum_tax += progress_tax
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${round(no_tax, 2)}')
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} ${round(wth_tax, 2)}')
+    print(f'{ru.ANNUAL_TAX_AMOUNT} {round(sum_tax, 2)}')
+    print(f'{ru.MONTHLY_TAX_PAYMENT} {round(sum_tax / 12, 2)}')
     
 def one_parent():
     '''
