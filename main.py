@@ -12,13 +12,13 @@ def one_person():
     monthly_incomes = []
 
     for month in range(1, 12 + 1):
-        income_value = float(input(f'{ru.ENTER_INCOME_FOR_MONTH}'))
+        income_value = float(input(f'{ru.INCOME_IN} {ru.NAME[month-1]} (USD): '))
         total_income += income_value
         monthly_incomes.append(income_value)
 
     for month in range(1, 12 + 1):
         tax_rate = 0
-        tax_free_allowance = float(input(f'{ru.ENTER_AMOUNT_OF_TAX_DEDUCTION_FOR_MONTH}'))
+        tax_free_allowance = float(input(f'{ru.AMOUNT_TAX_FREE_IN} {ru.NAME[month-1]} (USD): '))
         total_tax_free += tax_free_allowance
         taxable_income = monthly_incomes[month - 1] - tax_free_allowance
         total_taxed += taxable_income
@@ -71,19 +71,17 @@ def tax(count, nonTax):
             return allTax
  
 def married_couple():
-    MONTH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November',
-         'December']
     print(f'{ru.ENTER_AMOUNT_OF_ANNUAL_INCOME}')
     
     count = 0
-    for elem in MONTH:
-        count += int(input(f'{ru.INCOME_IN} {elem} (USD): '))
+    for elem in range(12):
+        count += int(input(f'{ru.INCOME_IN} {ru.NAME[elem]} (USD): '))
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${count}')
     print(f'{ru.SPECIFY_THE_AMOUNT_OF_ANNUAL_AMOUNT_NOT_TAXED}')
 
     nonTax = 0
-    for elem in MONTH:
-        nonTax += int(input(f'{ru.AMOUNT_TAX_FREE} {elem} (USD): '))
+    for elem in range(12):
+        nonTax += int(input(f'{ru.AMOUNT_TAX_FREE} {ru.NAME[elem]} (USD): '))
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} ${nonTax}')
 
     if (nonTax > count):
@@ -100,21 +98,19 @@ def one_parent():
     '''
     Function that calculates tax per parent.
     '''
-    MONTH = ['январе', 'феврале', 'марте', 'апреле', 'мае', 'июне', 'июле', 'августе', 'сентябре', 'октябре', 'ноябре',
-             'декабре']
     amount = 0
     no_tax = 0
     wth_tax = 0
     sum_tax = 0
     amount_month = []
     for month in range(1, 12 + 1):
-        value = float(input(f'{ru.INCOME_IN} {MONTH[month-1]} (USD): '))
+        value = float(input(f'{ru.INCOME_IN} {ru.NAME[month-1]} (USD): '))
         amount += value
         amount_month.append(value)
     print(f'{ru.AMOUNT_OF_ANNUAL_INCOME} ${round(amount, 2)}')
     for month in range(1, 12 + 1):
         progress_tax = 0
-        tax_free = float(input(f'{ru.AMOUNT_TAX_FREE_IN} {MONTH[month-1]} (USD): '))
+        tax_free = float(input(f'{ru.AMOUNT_TAX_FREE_IN} {ru.NAME[month-1]} (USD): '))
         no_tax += tax_free
         diff = amount_month[month-1] - tax_free
         wth_tax += diff
