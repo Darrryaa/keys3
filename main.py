@@ -45,10 +45,10 @@ def one_person():
             tax_rate += taxable_income * 0.1
         total_tax_paid += tax_rate
 
-    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED}, round(total_tax_free, 2)')
-    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME}, round(total_taxed, 2)')
-    print(f'{ru.ANNUAL_TAX_AMOUNT}, round(total_tax_paid, 2)')
-    print(f'{ru.MONTHLY_TAX_PAYMENT}, round(total_tax_paid / 12, 2)')
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_NOT_TAXED} {round(total_tax_free, 2)}')
+    print(f'{ru.AMOUNT_OF_ANNUAL_INCOME_TAXABLE_INCOME} {round(total_taxed, 2)}')
+    print(f'{ru.ANNUAL_TAX_AMOUNT} {round(total_tax_paid, 2)}')
+    print(f'{ru.MONTHLY_TAX_PAYMENT} {round(total_tax_paid / 12, 2)}')
             
 def tax(count, nonTax):
     YEAR_TAX = [[10, 18150],
